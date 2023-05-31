@@ -9,7 +9,8 @@ class SpicesController < ApplicationController
     def show
         spice = Spice.find(params[:id])
         render json: spice
-        end
+    end
+
 
     def create
         spice = Spice.create(spice_params)
@@ -34,8 +35,13 @@ private
         params.permit(:title, :image, :description, :notes, :rating)
     end
 
+    # def render_not_found_response
+    #     render json: { error: "Spice not found" }, status: :not_found
+    # end
+
     def render_not_found_response
-        render json: { error: "Spice not found" }, status: :not_found
+       raise ActionController::RoutingError.new('Not Found')
     end
+
 
 end
